@@ -1,5 +1,5 @@
 class Account
-  attr_reader :balance
+  attr_reader :balance, :record
 
   def initialize
     @balance = 0
@@ -8,6 +8,7 @@ class Account
 
   def deposit(amount, date)
     @balance += amount
+    # @record << [{credit: amount}, {date: date}]
   end
   def withdrawl
 
