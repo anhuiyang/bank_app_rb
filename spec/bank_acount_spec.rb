@@ -1,3 +1,4 @@
+require_relative '../bank_acount'
 describe 'Account' do
   let(:account) {Account.new}
 
