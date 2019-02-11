@@ -10,8 +10,8 @@ class Account
     @balance += amount
     # @record << [{credit: amount}, {date: date}]
   end
-  def withdrawl
-
+  def withdrawl(amount, date)
+    @balance -= amount
   end
   def statement
 
