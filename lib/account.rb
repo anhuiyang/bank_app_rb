@@ -6,15 +6,15 @@ class Account
     @records = []
   end
 
-  def deposit(amount, date = Time.now)
+  def deposit(amount, date)
     @balance += amount
-    new_transaction = Transaction.new(date, "credit", amount, @balance)
+    log = Transaction.new(date, "credit", amount, @balance)
     @records << new_transaction
   end
 
-  def withdrawl(amount, date = Time.now)
+  def withdrawl(amount, date)
     @balance += amount
-    new_transaction = Transaction.new(date, "debit", amount, @balance)
+    log = Transaction.new(date, "debit", amount, @balance)
     @records << new_transaction
   end
 
