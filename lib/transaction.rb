@@ -2,13 +2,11 @@ class Transaction
   attr_reader :date, :credit, :debit, :balance
   def initialize(date, status, amount, balance)
     @date = date.split('-').join('/')
-    @balance = balance
+    @balance = "%.2f" % balance
     if status == "credit"
-      @credit = amount.to_f
-      @debit = " "
+      @credit = "%.2f" % amount
     elsif status == "debit"
-      @credit = " "
-      @debit = amount.to_f
+      @debit = "%.2f" % amount
     end
   end
 end
