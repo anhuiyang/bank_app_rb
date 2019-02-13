@@ -4,11 +4,11 @@ class Transaction
     @date = date.split('-').join('/')
     @balance = balance
     if status == "credit"
-      @credit = amount
+      @credit = amount.to_f
       @debit = " "
     elsif status == "debit"
       @credit = " "
-      @debit = amount
+      @debit = amount.to_f
     end
   end
 end
