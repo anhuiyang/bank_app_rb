@@ -1,0 +1,6 @@
+Metrics/LineLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+Documentation:
+  Enabled: false
