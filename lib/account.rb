@@ -8,22 +8,26 @@ class Account
     @records = []
   end
 
-  def deposit(amount, date)
+  def deposit(amount, date, transaction = Transaction)
     @balance += amount
-    log = Transaction.new(date, 'credit', amount, @balance)
-    @records << log
+    save_transaction(date, 'debit', amount, @balance, transaction)
   end
 
-  def withdrawl(amount, date)
+  def withdrawl(amount, date, transaction = Transaction)
     @balance -= amount
-    log = Transaction.new(date, 'debit', amount, @balance)
-    @records << log
+    save_transaction(date, 'debit', amount, @balance, transaction)
   end
 
-  def statement
-    current_statement = Statement.new(@records)
+  def statement(statement = Statement)
+    current_statement = statement.new(@records)
     puts current_statement.print
   end
+  
   private
   attr_reader :records
+
+  def save_transaction(date, status, amount, balance, transaction)
+      log = transaction.new(date, status, amount, balance)
+      @records << log
+  end
 end
