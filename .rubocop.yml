@@ -2,5 +2,6 @@ Metrics/LineLength:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
+  Max: 100
 Documentation:
   Enabled: false

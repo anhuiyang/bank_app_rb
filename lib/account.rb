@@ -22,12 +22,13 @@ class Account
     current_statement = statement.new(@records)
     puts current_statement.print
   end
-  
+
   private
+
   attr_reader :records
 
   def save_transaction(date, status, amount, balance, transaction)
-      log = transaction.new(date, status, amount, balance)
-      @records << log
+    log = transaction.new(date, status, amount, balance)
+    @records << log
   end
 end
