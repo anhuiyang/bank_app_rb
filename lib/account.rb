@@ -27,5 +27,6 @@ class Account
   end
 
   private
+
   attr_reader :transaction
 end
