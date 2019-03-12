@@ -1,7 +1,7 @@
 require_relative '../lib/statement'
 
 describe 'Statement' do
-  let(:statement) {Statement.new}
+  let(:statement) { Statement.new }
   let(:credit) { double :credit }
   let(:debit) { double :debit }
   let(:transaction) { double :transaction }
@@ -14,7 +14,7 @@ describe 'Statement' do
       allow(debit).to receive(:date) { Time.new(2012, 0o1, 12) }
       allow(debit).to receive(:amount) { '-200.00' }
       allow(debit).to receive(:balance) { '800.00' }
-      allow(transaction).to receive(:records){[credit, debit]}
+      allow(transaction).to receive(:records) { [credit, debit] }
     end
     it 'will print records in statement format' do
       expect(statement.print(transaction.records)).to eq sample
