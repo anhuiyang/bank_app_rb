@@ -15,8 +15,8 @@ Class Statement to output the format of Transaction record
 [Rubocop]
 
 ## Getting Started
-1. Clone this repo `git clone git@github.com:anhuiyang/tech_test-bankrb.git`
-2. Change directory  `cd bank_rb`
+1. Clone this repo `git clone git@github.com:anhuiyang/bank_app_rb.git`
+2. Change directory  `cd bank_app_rb`
 3. Run bundle install dependencies `bundle`
 4. Run the test `rspec`
 5. REPL environment either `pry` or `irb`
