@@ -1,27 +1,23 @@
 require_relative '../lib/statement'
 
 describe 'Statement' do
+  let(:statement) {Statement.new}
+  let(:credit) { double :credit }
+  let(:debit) { double :debit }
   let(:transaction) { double :transaction }
-  it 'will print a statement of header and a credit transaction log' do
-    allow(transaction).to receive(:date).and_return('10/01/2012')
-    allow(transaction).to receive(:credit).and_return('1000.00')
-    allow(transaction).to receive(:debit).and_return(nil)
-    allow(transaction).to receive(:balance).and_return('1000.00')
-    statement_format = Statement.new([transaction])
-    expect(statement_format.print)
-      .to include('date || credit || debit || balance')
-    expect(statement_format.output)
-      .to include('10/01/2012 || 1000.00 || || 1000.00')
-  end
-  it 'will print a statement of header and a debit transaction log' do
-    allow(transaction).to receive(:date).and_return('14/01/2012')
-    allow(transaction).to receive(:credit).and_return(nil)
-    allow(transaction).to receive(:debit).and_return('200.00')
-    allow(transaction).to receive(:balance).and_return('800.00')
-    statement_format = Statement.new([transaction])
-    expect(statement_format.print)
-      .to include('date || credit || debit || balance')
-    expect(statement_format.output)
-      .to include('14/01/2012 || || 200.00 || 800.00')
+  sample = "date || credit || debit || balance\n12/01/2012 || || 200.00 || 800.00\n10/01/2012 || 1000.00 || || 1000.00\n"
+  context 'with two record of transaction' do
+    before do
+      allow(credit).to receive(:date) { Time.new(2012, 0o1, 10) }
+      allow(credit).to receive(:amount) { '1000.00' }
+      allow(credit).to receive(:balance) { '1000.00' }
+      allow(debit).to receive(:date) { Time.new(2012, 0o1, 12) }
+      allow(debit).to receive(:amount) { '-200.00' }
+      allow(debit).to receive(:balance) { '800.00' }
+      allow(transaction).to receive(:records){[credit, debit]}
+    end
+    it 'will print records in statement format' do
+      expect(statement.print(transaction.records)).to eq sample
+    end
   end
 end

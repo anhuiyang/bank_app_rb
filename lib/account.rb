@@ -1,34 +1,32 @@
 require_relative './transaction'
 require_relative './statement'
+require_relative './debit'
+require_relative './credit'
+
 class Account
   attr_reader :balance
 
-  def initialize
+  def initialize(transaction = Transaction.new)
     @balance = 0
-    @records = []
+    @transaction = transaction
   end
 
-  def deposit(amount, date, transaction = Transaction)
+  def deposit(date, amount, credit = Credit)
     @balance += amount
-    save_transaction(date, 'debit', amount, @balance, transaction)
+    cr = credit.new(date, amount, @balance)
+    @transaction.add(cr)
   end
 
-  def withdrawl(amount, date, transaction = Transaction)
+  def withdrawl(date, amount, debit = Debit)
     @balance -= amount
-    save_transaction(date, 'debit', amount, @balance, transaction)
+    db = debit.new(date, amount, @balance)
+    @transaction.add(db)
   end
 
-  def statement(statement = Statement)
-    current_statement = statement.new(@records)
-    puts current_statement.print
+  def print_statement(statement = Statement.new)
+    statement.print(@transaction.records)
   end
 
   private
 
-  attr_reader :records
-
-  def save_transaction(date, status, amount, balance, transaction)
-    log = transaction.new(date, status, amount, balance)
-    @records << log
-  end
 end

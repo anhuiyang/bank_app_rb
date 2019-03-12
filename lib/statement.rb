@@ -1,24 +1,15 @@
 class Statement
-  attr_reader :output
-  def initialize(records)
-    @records = records.reverse
-    @output = ['date || credit || debit || balance']
+  def initialize
+    @logs ="date || credit || debit || balance\n"
   end
-
-  def print
-    @records.each do |record|
-      record.debit.nil? ? formate_cr(record) : formate_dr(record)
+  def print(records)
+    records.reverse.each do |record|
+      if record.amount[0] != "-"
+        @logs += record.date.strftime('%d/%m/%Y') + " || " + record.amount + " || || " + record.balance + "\n"
+      else
+        @logs += record.date.strftime('%d/%m/%Y') + " || || " + record.amount.delete('-') + " || " + record.balance + "\n"
+      end
     end
-    @output
-  end
-
-  private
-
-  def formate_cr(record)
-    @output << record.date + ' || ' + record.credit + ' || || ' + record.balance
-  end
-
-  def formate_dr(record)
-    @output << record.date + ' || || ' + record.debit + ' || ' + record.balance
+    @logs
   end
 end

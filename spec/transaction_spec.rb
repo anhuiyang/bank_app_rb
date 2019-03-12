@@ -1,18 +1,30 @@
 require_relative '../lib/transaction'
 
 describe 'Transaction' do
-  it 'store credit transaction details' do
-    transaction = Transaction.new('10-01-2012', 'credit', 1000, 1000)
-    expect(transaction.date).to eq '10/01/2012'
-    expect(transaction.credit).to eq '1000.00'
-    expect(transaction.debit).to eq nil
-    expect(transaction.balance).to eq '1000.00'
-  end
-  it 'store debit transaction details' do
-    transaction = Transaction.new('14-01-2012', 'debit', 200, 800)
-    expect(transaction.date).to eq '14/01/2012'
-    expect(transaction.credit).to eq nil
-    expect(transaction.debit).to eq '200.00'
-    expect(transaction.balance).to eq '800.00'
+  let(:transaction) { Transaction.new }
+  let(:credit) { double :Credit }
+  let(:debit) { double :Debit }
+
+  context 'credit and debit records' do
+    before do
+      allow(credit).to receive(:date) { Time.new(2012, 0o1, 10) }
+      allow(credit).to receive(:amount) { 1000 }
+      allow(credit).to receive(:balance) { 1000 }
+      allow(debit).to receive(:date) { Time.new(2012, 0o1, 12) }
+      allow(debit).to receive(:amount) { 200 }
+      allow(debit).to receive(:balance) { 800 }
+    end
+    it 'stores deach credit and debit transaction details' do
+      transaction.add(credit)
+      cr = transaction.records[0]
+      expect(cr.date).to eq Time.new(2012, 0o1, 10)
+      expect(cr.amount).to eq 1000
+      expect(cr.balance).to eq 1000
+      transaction.add(debit)
+      db = transaction.records[1]
+      expect(db.date).to eq Time.new(2012, 0o1, 12)
+      expect(db.amount).to eq 200
+      expect(db.balance).to eq 800
+    end
   end
 end
