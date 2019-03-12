@@ -1,4 +1,5 @@
 # Bank Tech Test in Ruby
+A basic tech test of bank application
 
 ## Description
 A simple bank app to interact from console
