@@ -5,7 +5,6 @@ require_relative './credit'
 
 class Account
   attr_reader :balance
-
   def initialize(transaction = Transaction.new)
     @balance = 0
     @transaction = transaction
@@ -28,5 +27,5 @@ class Account
   end
 
   private
-
+  attr_reader :transaction
 end
