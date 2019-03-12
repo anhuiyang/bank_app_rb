@@ -22,6 +22,7 @@ Class Statement to output the format of Transaction record
 6. Load the file `require "./lib/account"`
 7. Initialize the calss `account = Account.new`
 8. Interact with account via `account.deposit(date, amount)` `account.withdrawl(date.amount)` `account.balance` `account.print_statement`
+ ![diagram](https://github.com/anhuiyang/tech_test-bankrb/blob/master/images/Screenshot%202019-03-12%20at%203.27.18%20pm.png?raw=true)
 
 ## Diagram
 ![diagram](https://github.com/anhuiyang/tech_test-bankrb/blob/master/images/bank%20-%20diagram.png?raw=true)
