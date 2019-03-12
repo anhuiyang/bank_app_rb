@@ -11,22 +11,25 @@ class Account
   end
 
   def deposit(date, amount, credit = Credit)
-    @balance += amount
-    cr = credit.new(date, amount, @balance)
-    @transaction.add(cr)
+    add_transaction(date, amount, credit)
+    @balance
   end
 
   def withdrawl(date, amount, debit = Debit)
-    @balance -= amount
-    db = debit.new(date, amount, @balance)
-    @transaction.add(db)
+    add_transaction(date, amount, debit)
+    @balance
   end
 
   def print_statement(statement = Statement.new)
-    statement.print(@transaction.records)
+    p statement.print(@transaction.records)
   end
 
   private
 
   attr_reader :transaction
+  def add_transaction(date, amount, type)
+    type == Credit ? @balance += amount : @balance -= amount
+    record = type.new(date, amount, @balance)
+    @transaction.add(record)
+  end
 end
