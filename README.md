@@ -1,7 +1,7 @@
 # Bank Tech Test in Ruby
 
 ## Description
-A bank bank app to interact from console
+A simple bank app to interact from console
 With a user interface class Account and four methods deposit / withdrawl / balance / print_statement
 Class Credit to keep deposit details
 Class Debit to keep deposit details
@@ -15,7 +15,7 @@ Class Statement to output the format of Transaction record
 
 ## Getting Started
 1. Clone this repo `git clone git@github.com:anhuiyang/tech_test-bankrb.git`
-2. Change directory  `cd tech_test-bankrb`
+2. Change directory  `cd bank_rb`
 3. Run bundle install dependencies `bundle`
 4. Run the test `rspec`
 5. REPL environment either `pry` or `irb`
